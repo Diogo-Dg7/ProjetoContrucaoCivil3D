@@ -1,0 +1,232 @@
+.hud {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.hud__crosshair {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.35);
+}
+
+.hud__zone {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  padding: 10px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  background: var(--color-surface);
+}
+
+.hud__zone-label {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.hud__hints {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 16px;
+  width: max-content;
+  max-width: calc(100% - 32px);
+  padding: 8px 14px;
+  transform: translateX(-50%);
+  border-radius: 10px;
+  background: rgba(15, 16, 20, 0.6);
+  font-size: 0.82rem;
+  color: var(--color-muted);
+}
+
+.hud__toast {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  padding: 8px 14px;
+  transform: translateX(-50%);
+  border-radius: 8px;
+  background: var(--color-surface);
+  font-size: 0.9rem;
+}
+
+/* ---------- Ação da mira ---------- */
+.hud__prompt {
+  position: absolute;
+  top: calc(50% + 22px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: rgba(15, 16, 20, 0.75);
+  font-size: 0.92rem;
+  white-space: nowrap;
+}
+
+.hud__prompt kbd { margin-right: 4px; border-color: var(--color-accent-2); color: var(--color-accent-2); }
+.hud__prompt.is-disabled { color: var(--color-muted); }
+
+/* ---------- Item carregado ---------- */
+.hud__held {
+  position: absolute;
+  right: 16px;
+  bottom: 64px;
+  display: grid;
+  gap: 2px;
+  padding: 10px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  background: var(--color-surface);
+  text-align: right;
+}
+
+.hud__held span,
+.hud__held small { font-size: 0.7rem; color: var(--color-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.hud__held kbd { font-size: 0.65rem; min-width: 0; padding: 0 4px; }
+
+/* ---------- Painel do tutorial ---------- */
+.tutorial {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: min(330px, calc(100% - 32px));
+  padding: 14px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--color-surface);
+  font-size: 0.88rem;
+}
+
+.tutorial__plan {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.tutorial__step {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.tutorial__step strong { font-size: 1.05rem; }
+.tutorial__step small { color: var(--color-muted); white-space: nowrap; }
+
+.tutorial__bar {
+  height: 6px;
+  margin-top: 8px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.tutorial__bar i {
+  display: block;
+  height: 100%;
+  background: var(--color-accent-2);
+  transition: width 0.3s;
+}
+
+.tutorial__tip {
+  margin: 10px 0 0;
+  padding: 8px 10px;
+  border-left: 3px solid var(--color-accent);
+  border-radius: 4px;
+  background: rgba(224, 103, 47, 0.1);
+  color: #dcd9d2;
+  line-height: 1.4;
+}
+
+.tutorial__objective {
+  display: grid;
+  gap: 2px;
+  margin-top: 10px;
+}
+
+.tutorial__objective span {
+  font-size: 0.7rem;
+  color: var(--color-accent-2);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.tutorial__objective b { font-weight: 600; line-height: 1.4; }
+
+.tutorial__status {
+  margin: 8px 0 0;
+  font-size: 0.78rem;
+  color: var(--color-muted);
+}
+
+@media (max-width: 720px) {
+  .tutorial { top: auto; bottom: 120px; }
+}
+
+.hud__prompt small {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.72rem;
+  color: var(--color-muted);
+  text-align: center;
+}
+
+/* ---------- Modo especial (ex.: posicionar a obra) ---------- */
+.hud__mode {
+  position: absolute;
+  bottom: 64px;
+  left: 50%;
+  max-width: calc(100% - 32px);
+  padding: 10px 16px;
+  transform: translateX(-50%);
+  border: 1px solid #66bb6a;
+  border-radius: 10px;
+  background: var(--color-surface);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* ---------- Estoque do objeto na mira ---------- */
+.hud__stock {
+  margin-top: 6px;
+  font-size: 0.78rem;
+  color: var(--color-muted);
+  text-align: center;
+}
+
+.hud__stock b { color: var(--color-text); }
+
+.hud__stock i {
+  display: block;
+  height: 5px;
+  margin-top: 3px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+
+.hud__stock em {
+  display: block;
+  height: 100%;
+  background: #66bb6a;
+}
+
+.hud__stock.is-low em { background: #ef5350; }

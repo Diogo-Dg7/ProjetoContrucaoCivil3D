@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Réplica 3D — Sala de Construção Civil | SENAI</title>
+  <link rel="stylesheet" href="css/main.css" />
+
+  <!-- Three.js via CDN (sem build). Versão fixa para todos do grupo usarem a mesma. -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <!-- Canvas do Three.js é inserido aqui -->
+  <div id="app"></div>
+
+  <!-- HUD (aparece durante a exploração) -->
+  <div id="hud" class="hud" hidden>
+    <div class="hud__crosshair"></div>
+    <div class="hud__prompt" data-hud="prompt" hidden></div>
+
+    <div class="hud__zone">
+      <span class="hud__zone-label">Você está em</span>
+      <strong data-hud="zone">—</strong>
+    </div>
+
+    <aside class="tutorial">
+      <span class="tutorial__plan" data-t="plan">Nenhuma planta escolhida</span>
+      <div class="tutorial__step">
+        <strong data-t="stepTitle"></strong>
+        <small data-t="stepLabel"></small>
+      </div>
+      <div class="tutorial__bar" data-t="progress" hidden><i data-t="bar"></i></div>
+      <p class="tutorial__tip" data-t="tip" hidden></p>
+      <div class="tutorial__objective">
+        <span>Próximo passo</span>
+        <b data-t="objective"></b>
+      </div>
+      <p class="tutorial__status" data-t="status" hidden></p>
+    </aside>
+
+    <div class="hud__held" data-hud="held" hidden>
+      <span>Carregando</span>
+      <strong></strong>
+      <small data-hud="drop"></small>
+    </div>
+
+    <div class="hud__hints">
+      <span><kbd>WASD</kbd> andar</span>
+      <span><kbd>E</kbd> pegar / usar 1</span>
+      <span><kbd>Q</kbd> deixar 1 no chão</span>
+      <span><kbd>Shift</kbd>+<kbd>E</kbd>/<kbd>Q</kbd> tudo</span>
+      <span><kbd>P</kbd> plantas</span>
+      <span><kbd>L</kbd> nomes</span>
+      <span><kbd>Esc</kbd> pausar</span>
+    </div>
+    <div class="hud__mode" data-hud="mode" hidden></div>
+    <div class="hud__toast" data-hud="toast" hidden></div>
+  </div>
+
+  <!-- Escolha de planta -->
+  <section id="plan-selector" class="modal" hidden>
+    <div class="modal__card">
+      <span class="start-card__badge">Quadro de Projetos</span>
+      <h2 class="modal__title">Escolha a planta que você quer construir</h2>
+      <p class="modal__intro">
+        Depois de escolher, você posiciona o molde da casa na Área de Construção. Os blocos fantasmas aparecem uma fiada de cada vez.
+        Busque os materiais nos depósitos, prepare a argamassa e use as máquinas quando precisar.
+      </p>
+      <p class="modal__warning" data-role="warning" hidden>
+        ⚠️ Ao confirmar o local da nova planta, a obra atual será desmontada.
+      </p>
+      <div class="plan-grid" data-role="plans"></div>
+      <button class="modal__cancel" data-action="cancel">Voltar para a sala</button>
+    </div>
+  </section>
+
+  <!-- Tela inicial / pausa -->
+  <section id="start-screen" class="start-screen" data-mode="start">
+    <div class="start-card">
+      <span class="start-card__badge">SENAI • Projeto 3D com Three.js</span>
+
+      <h1 class="only-start">Réplica 3D da Sala de<br />Construção Civil</h1>
+      <h1 class="only-pause">Pausado</h1>
+
+      <p class="start-card__intro only-start">
+        Um passeio virtual em <strong>primeira pessoa</strong> pela nossa sala de aula do SENAI,
+        recriada a partir da planta baixa e de fotos reais do ambiente.
+        Escolha uma <strong>planta de casa</strong> no Quadro de Projetos e construa de verdade:
+        busque tijolos e pisos nos depósitos, prepare a argamassa na <strong>betoneira</strong>,
+        corte peças nas <strong>máquinas</strong> e assente tudo nos <strong>blocos fantasmas</strong>.
+      </p>
+
+      <ul class="start-card__legend only-start">
+        <li><i style="--c: #2fa84f"></i>Depósitos</li>
+        <li><i style="--c: #f2c200"></i>Área de construção e de máquinas (faixa amarela no chão)</li>
+      </ul>
+
+      <h2>Como jogar</h2>
+      <div class="controls-grid">
+        <div><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd><span>andar (Shift corre)</span></div>
+        <div><kbd>Mouse</kbd><span>olhar e mirar</span></div>
+        <div><kbd>E</kbd><span>pegar, cortar, assentar — 1 por vez (segure para continuar)</span></div>
+        <div><kbd>Q</kbd><span>deixar 1 no chão ou devolver ao estoque (segure para continuar)</span></div>
+        <div><kbd>Shift</kbd>+<kbd>E</kbd><span>pegar/cortar tudo · <kbd>Shift</kbd>+<kbd>Q</kbd> largar tudo</span></div>
+        <div><kbd>P</kbd><span>escolher planta e local da obra (<kbd>R</kbd> gira o molde)</span></div>
+        <div><kbd>L</kbd><span>mostrar/ocultar nomes das áreas</span></div>
+        <div><kbd>Esc</kbd><span>pausar e liberar o mouse</span></div>
+      </div>
+
+      <button class="start-card__button" data-action="enter" disabled>Carregando…</button>
+      <p class="start-card__note" data-role="note">
+        Siga a seta amarela e o painel "Próximo passo" — eles mostram o que fazer.
+      </p>
+    </div>
+  </section>
+
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>

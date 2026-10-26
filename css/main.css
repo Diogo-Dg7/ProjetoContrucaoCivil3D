@@ -1,0 +1,5 @@
+/* Ponto de entrada dos estilos: cada componente tem seu próprio arquivo. */
+@import url('base.css');
+@import url('components/start-screen.css');
+@import url('components/hud.css');
+@import url('components/plan-selector.css');

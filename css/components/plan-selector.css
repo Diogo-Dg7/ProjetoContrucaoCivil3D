@@ -1,0 +1,112 @@
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  padding: 24px 16px;
+  overflow-y: auto;
+  background: rgba(10, 11, 14, 0.6);
+  backdrop-filter: blur(6px);
+}
+
+.modal__card {
+  width: min(1040px, 100%);
+  padding: 28px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+}
+
+.modal__title { margin: 12px 0 8px; font-size: clamp(1.3rem, 3vw, 1.8rem); }
+.modal__intro { margin: 0; color: #d6d4cf; line-height: 1.5; }
+
+.modal__warning {
+  margin: 14px 0 0;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: rgba(242, 194, 0, 0.12);
+  color: var(--color-accent-2);
+}
+
+.plan-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.plan-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  overflow: hidden;
+}
+
+.plan-card.is-active { border-color: var(--color-accent-2); }
+
+.plan-card__preview {
+  display: grid;
+  place-items: center;
+  height: 150px;
+  padding: 12px;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px) 0 0 / 16px 16px,
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px) 0 0 / 16px 16px,
+    #1d4f91;
+}
+
+.plan-card__preview svg { width: 100%; height: 100%; }
+
+.plan-card__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 14px 16px 16px;
+}
+
+.plan-card__level {
+  align-self: flex-start;
+  padding: 2px 8px;
+  border-radius: 99px;
+  background: rgba(242, 194, 0, 0.15);
+  color: var(--color-accent-2);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.plan-card h3 { margin: 8px 0 4px; }
+.plan-card p { margin: 0; color: var(--color-muted); font-size: 0.9rem; line-height: 1.4; }
+
+.plan-card__materials {
+  margin: 12px 0 0;
+  padding-left: 18px;
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.plan-card__materials small { color: var(--color-muted); }
+.plan-card .plan-card__steps { margin-top: 6px; font-size: 0.8rem; }
+
+.plan-card__button,
+.modal__cancel {
+  padding: 10px;
+  border: 0;
+  border-radius: 8px;
+  font: 700 0.95rem var(--font);
+  cursor: pointer;
+}
+
+.plan-card__button { margin-top: auto; background: var(--color-accent); color: #fff; }
+.plan-card__materials + .plan-card__steps + .plan-card__button { margin-top: 14px; }
+.plan-card__button:hover { filter: brightness(1.1); }
+
+.modal__cancel {
+  display: block;
+  margin: 20px auto 0;
+  padding: 10px 24px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-text);
+}
